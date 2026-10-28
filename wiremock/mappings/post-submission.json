@@ -1,0 +1,12 @@
+{
+  "name": "Quiz submission acknowledgement (no server persistence)",
+  "request": { "method": "POST", "urlPath": "/api/quiz-submissions" },
+  "response": {
+    "status": 202,
+    "headers": { "Content-Type": "application/json" },
+    "jsonBody": {
+      "acknowledged": true,
+      "message": "Static acknowledgement only. Results are saved on your device."
+    }
+  }
+}

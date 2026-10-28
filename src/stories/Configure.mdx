@@ -1,0 +1,30 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+<Meta title="Configure your project" />
+
+# QuizApp component library
+
+A focused React quiz, built with the same Atomic Design structure as the adjacent Todo List project.
+
+## Explore the system
+
+- **Atoms:** Button, IconButton, Input, Checkbox, and Badge retain the Todo List public APIs, native props, refs, variants, sizes, radii, and custom classes. See **Atoms / Props reference**.
+- **Molecules:** native radio answers, question navigation items, countdown timer, answer statistics, accessible dialog, and question review.
+- **Organisms:** the question navigator, question card, quiz summary, and final results.
+- **Templates:** the complete responsive quiz layout. Select answers and navigate to explore the interaction without changing a real attempt.
+
+Use the **Theme** toolbar for light and dark previews. Controls expose configurable props; interactions appear in the Actions panel. The Accessibility panel supports inspection of each story.
+
+## Design and accessibility
+
+All visual components have a JSX file and a CSS Module. Shared colors, spacing, typography, radii, motion, and control dimensions live in `src/styles/tokens.css`. Atoms have no quiz state or API dependencies.
+
+Answers use native radio controls: Tab enters the group, arrow keys select another answer, and Space selects the focused answer. Dialogs use the native modal dialog for focus trapping, Escape handling, and focus restoration. Timer updates do not interrupt screen readers every second. Reduced-motion preferences are respected.
+
+## State and mock API
+
+`quizModel.js` validates data and defines immutable transitions and derived statistics. `quizStore.js` owns the current attempt, versioned browser persistence, and the deadline. `useQuiz.js` integrates it through `useSyncExternalStore`. Components receive data and callbacks through props.
+
+Run `npm run start:mock` to serve the bundled fixture through WireMock on port 8080. The app also works without WireMock. Its POST endpoint only acknowledges a submission; saved answers and results belong to localStorage, not a server database.
+
+See the repository README for setup, configuration, commands, and the complete verification checklist.

@@ -1,0 +1,9 @@
+{
+  "name": "React Basics quiz (static fixture)",
+  "request": { "method": "GET", "urlPath": "/api/quizzes/react-basics" },
+  "response": {
+    "status": 200,
+    "headers": { "Content-Type": "application/json" },
+    "bodyFileName": "react-basics.json"
+  }
+}

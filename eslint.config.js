@@ -1,11 +1,13 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import { defineConfig, globalIgnores } from 'eslint/config'
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import { defineConfig, globalIgnores } from 'eslint/config';
+import storybook from 'eslint-plugin-storybook';
+import prettier from 'eslint-config-prettier/flat';
 
 export default defineConfig([
-  globalIgnores(['dist']),
+  globalIgnores(['dist', 'storybook-static', '.npm-cache']),
   {
     files: ['**/*.{js,jsx}'],
     extends: [
@@ -18,4 +20,10 @@ export default defineConfig([
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
   },
-])
+  {
+    files: ['*.config.js'],
+    languageOptions: { globals: globals.node },
+  },
+  ...storybook.configs['flat/recommended'],
+  prettier,
+]);

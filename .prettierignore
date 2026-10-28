@@ -1,0 +1,12 @@
+node_modules/
+dist/
+dist-ssr/
+storybook-static/
+.cache/
+.npm-cache/
+.vite/
+*.log
+package-lock.json
+.env
+.env.*
+!.env.example

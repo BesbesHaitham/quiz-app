@@ -1,0 +1,128 @@
+{
+  "id": "react-basics",
+  "title": "React Basics",
+  "description": "Test your knowledge about React",
+  "durationSeconds": 600,
+  "questions": [
+    {
+      "id": "react",
+      "text": "What is React?",
+      "difficulty": "Easy",
+      "options": [
+        "A database management system",
+        "A JavaScript library for building user interfaces",
+        "A programming language",
+        "A web server"
+      ],
+      "correctIndex": 1,
+      "explanation": "React is a JavaScript library for building user interfaces from reusable components."
+    },
+    {
+      "id": "components",
+      "text": "Which of the following is a valid React functional component?",
+      "difficulty": "Easy",
+      "options": [
+        "function Welcome() { return <h1>Hello</h1>; }",
+        "function welcome() { print('Hello'); }",
+        "component Welcome = '<h1>Hello</h1>';",
+        "new React('<h1>Hello</h1>');"
+      ],
+      "correctIndex": 0,
+      "explanation": "A function component starts with a capital letter and returns renderable content, such as JSX."
+    },
+    {
+      "id": "state",
+      "text": "What hook is used to manage state in a functional component in React?",
+      "difficulty": "Medium",
+      "options": ["useEffect", "useContext", "useState", "useRef"],
+      "correctIndex": 2,
+      "explanation": "useState adds a state variable and a setter to a function component. Updating that state requests a new render. useRef retains a value without triggering a render."
+    },
+    {
+      "id": "state-syntax",
+      "text": "Which syntax correctly declares a count state variable?",
+      "difficulty": "Easy",
+      "options": [
+        "const count = useState = 0;",
+        "const [count, setCount] = useState(0);",
+        "const { count, setCount } = useState(0);",
+        "const count = React.state(0);"
+      ],
+      "correctIndex": 1,
+      "explanation": "useState returns an array containing the current state and its setter. Array destructuring gives them useful names."
+    },
+    {
+      "id": "jsx",
+      "text": "What is JSX?",
+      "difficulty": "Easy",
+      "options": [
+        "A CSS preprocessor",
+        "A browser API for JSON",
+        "A replacement for JavaScript",
+        "A syntax extension for writing markup in JavaScript"
+      ],
+      "correctIndex": 3,
+      "explanation": "JSX is a JavaScript syntax extension that lets you describe UI with markup. A build tool transforms it into JavaScript."
+    },
+    {
+      "id": "props",
+      "text": "How do you pass data from a parent component to a child?",
+      "difficulty": "Easy",
+      "options": [
+        "Through props",
+        "By changing the child's state directly",
+        "Through the DOM only",
+        "By calling useEffect in the parent"
+      ],
+      "correctIndex": 0,
+      "explanation": "Parents pass information to children through props. A child treats its props as read-only inputs."
+    },
+    {
+      "id": "lists",
+      "text": "Which array method is commonly used to render a list of React elements?",
+      "difficulty": "Medium",
+      "options": ["forEach()", "find()", "map()", "includes()"],
+      "correctIndex": 2,
+      "explanation": "map() transforms each item into an element and returns a new array. Give each element a stable key that identifies the item."
+    },
+    {
+      "id": "effects",
+      "text": "What is the primary purpose of useEffect?",
+      "difficulty": "Medium",
+      "options": [
+        "To declare a state variable",
+        "To synchronize a component with an external system",
+        "To return JSX from a component",
+        "To prevent every re-render"
+      ],
+      "correctIndex": 1,
+      "explanation": "Effects synchronize components with external systems, such as subscriptions, timers, or browser APIs. Return a cleanup function when necessary."
+    },
+    {
+      "id": "immutability",
+      "text": "Which statement is true about updating React state?",
+      "difficulty": "Medium",
+      "options": [
+        "Mutating a state object always triggers a render",
+        "State must be stored in global variables",
+        "State updates immediately change the running function's snapshot",
+        "Objects and arrays in state should be replaced with new values"
+      ],
+      "correctIndex": 3,
+      "explanation": "Treat state as immutable. Create a new object or array and pass it to the setter. Use a functional updater when the next value depends on previous state."
+    },
+    {
+      "id": "virtual-dom",
+      "text": "What is the virtual DOM?",
+      "difficulty": "Medium",
+      "options": [
+        "An in-memory representation of the UI used during reconciliation",
+        "A second browser window",
+        "A database of HTML templates",
+        "A browser feature that replaces CSS"
+      ],
+      "correctIndex": 0,
+      "explanation": "React keeps an in-memory representation of the UI, reconciles successive renders, and commits the necessary changes to the actual DOM."
+    }
+  ]
+}
