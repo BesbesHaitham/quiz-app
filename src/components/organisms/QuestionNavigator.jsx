@@ -4,7 +4,7 @@ import styles from './QuestionNavigator.module.css';
 export default function QuestionNavigator({ quiz, answers, currentIndex, onNavigate }) {
   const answered = quiz.questions.filter((question) => Object.hasOwn(answers, question.id)).length;
   return (
-    <aside className={styles.base} aria-label="Quiz questions">
+    <aside className={styles.base} aria-label="Questions du quiz">
       <header className={styles.header}>
         <h2>{quiz.title}</h2>
         <p>{quiz.description}</p>
@@ -12,7 +12,7 @@ export default function QuestionNavigator({ quiz, answers, currentIndex, onNavig
           <div
             className={styles.track}
             role="progressbar"
-            aria-label="Questions answered"
+            aria-label="Questions répondues"
             aria-valuemin={0}
             aria-valuemax={quiz.questions.length}
             aria-valuenow={answered}
@@ -24,7 +24,7 @@ export default function QuestionNavigator({ quiz, answers, currentIndex, onNavig
           </span>
         </div>
       </header>
-      <nav aria-label="Go to question" className={styles.nav}>
+      <nav aria-label="Aller à une question" className={styles.nav}>
         <ol>
           {quiz.questions.map((question, index) => (
             <li key={question.id}>
@@ -32,7 +32,6 @@ export default function QuestionNavigator({ quiz, answers, currentIndex, onNavig
                 question={question}
                 index={index}
                 active={index === currentIndex}
-                answer={answers[question.id]}
                 onClick={() => onNavigate(index)}
               />
             </li>

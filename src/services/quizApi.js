@@ -9,14 +9,14 @@ export async function request(path, options = {}) {
     headers: { 'Content-Type': 'application/json', ...options.headers },
     signal: AbortSignal.timeout(1800),
   });
-  if (!response.ok) throw new Error(`Quiz API returned ${response.status}`);
+  if (!response.ok) throw new Error(`L’API du quiz a renvoyé le statut ${response.status}`);
   return response.status === 204 ? null : response.json();
 }
 
 export const quizApi = {
   async getQuiz() {
     const quiz = await request('/quizzes/react-basics');
-    if (!validQuiz(quiz)) throw new Error('Invalid quiz data');
+    if (!validQuiz(quiz)) throw new Error('Données du quiz invalides');
     return quiz;
   },
   submit: (attempt) =>

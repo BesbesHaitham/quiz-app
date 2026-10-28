@@ -2,8 +2,8 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  min-height: 794px;
-  padding: var(--space-8);
+  min-height: var(--quiz-card-min-height);
+  padding: var(--space-6);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   background: var(--color-surface);
@@ -14,6 +14,10 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-3);
+}
+.badges > span {
+  padding: var(--space-1) var(--space-3);
+  font-size: var(--font-xs);
 }
 .questionBadge {
   background: var(--color-question);
@@ -34,12 +38,12 @@
   color: var(--color-danger);
 }
 .title {
-  margin-top: var(--space-8);
-  margin-bottom: var(--space-8);
+  margin-top: var(--space-5);
+  margin-bottom: var(--space-5);
   font-size: var(--font-question);
   font-weight: 650;
-  line-height: 1.45;
-  letter-spacing: -0.9px;
+  line-height: 1.4;
+  letter-spacing: -0.6px;
   overflow-wrap: anywhere;
 }
 .title:focus {
@@ -47,13 +51,13 @@
 }
 .options {
   display: grid;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 .navigation {
   display: flex;
   justify-content: space-between;
   gap: var(--space-4);
-  padding-top: var(--space-10);
+  padding-top: var(--space-5);
   margin-top: auto;
 }
 .previous {
@@ -61,12 +65,13 @@
 }
 .previous,
 .next {
-  min-height: 60px;
-  min-width: 180px;
+  min-height: 44px;
+  min-width: 132px;
+  font-size: var(--font-sm);
   border-radius: var(--radius-md);
 }
 .next {
-  min-width: 210px;
+  min-width: 148px;
 }
 .navigation button > span {
   gap: var(--space-5);
@@ -77,21 +82,21 @@
   }
   .previous,
   .next {
-    min-width: 140px;
+    min-width: 112px;
   }
 }
 @media (max-width: 960px) {
   .base {
-    min-height: 730px;
+    min-height: 540px;
   }
 }
 @media (max-width: 640px) {
   .base {
-    min-height: 600px;
+    min-height: 480px;
     padding: var(--space-5);
   }
   .title {
-    font-size: 1.4rem;
+    font-size: 1.25rem;
     margin-block: var(--space-6);
     letter-spacing: -0.5px;
   }
@@ -106,7 +111,7 @@
   .previous,
   .next {
     min-width: 0;
-    min-height: 50px;
+    min-height: 44px;
     flex: 1;
     padding-inline: var(--space-3);
     font-size: var(--font-sm);

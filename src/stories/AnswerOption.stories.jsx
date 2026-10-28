@@ -3,7 +3,7 @@ import { useArgs } from 'storybook/preview-api';
 import AnswerOption from '../components/molecules/AnswerOption';
 
 export default {
-  title: 'Molecules/AnswerOption',
+  title: 'Molécules/Choix de réponse',
   component: AnswerOption,
   parameters: { frame: 'form' },
   args: {
@@ -28,12 +28,13 @@ export default {
     );
   },
 };
-export const Default = {};
-export const Selected = { args: { checked: true } };
+export const Default = { name: 'Par défaut' };
+export const Selected = { name: 'Sélectionné', args: { checked: true } };
 export const LongAnswer = {
+  name: 'Réponse longue',
   args: {
     option:
-      'A JavaScript library for building interactive user interfaces from reusable components',
+      'Une bibliothèque JavaScript pour créer des interfaces interactives avec des composants réutilisables',
   },
 };
-export const Disabled = { args: { disabled: true } };
+export const Disabled = { name: 'Désactivé', args: { disabled: true } };

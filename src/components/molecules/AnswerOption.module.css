@@ -1,13 +1,13 @@
 .base {
   display: flex;
   align-items: center;
-  gap: var(--space-6);
-  min-height: 80px;
-  padding: var(--space-5) var(--space-6);
+  gap: var(--space-4);
+  min-height: 52px;
+  padding: var(--space-3) var(--space-5);
   border: 1.5px solid var(--color-option-border);
   border-radius: var(--radius-lg);
   cursor: pointer;
-  font-size: var(--font-lg);
+  font-size: var(--font-md);
   font-weight: 500;
   transition:
     background var(--transition-fast),
@@ -25,16 +25,16 @@
 .base input {
   appearance: none;
   margin: 0;
-  width: 30px;
-  height: 30px;
+  width: 23px;
+  height: 23px;
   flex-shrink: 0;
-  border: 2.5px solid var(--color-option-radio);
+  border: 2px solid var(--color-option-radio);
   border-radius: var(--radius-full);
   background: var(--color-surface);
   cursor: pointer;
 }
 .base input:checked {
-  border: 8px solid var(--color-primary);
+  border: 6px solid var(--color-primary);
 }
 .base:has(input:focus-visible) {
   outline: 2px solid var(--color-primary);
@@ -54,14 +54,14 @@
   .base {
     gap: var(--space-3);
     padding: var(--space-4);
-    min-height: 72px;
+    min-height: 56px;
     font-size: var(--font-md);
   }
   .base input {
-    width: 25px;
-    height: 25px;
+    width: 22px;
+    height: 22px;
   }
   .base input:checked {
-    border-width: 7px;
+    border-width: 6px;
   }
 }

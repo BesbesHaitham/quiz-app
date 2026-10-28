@@ -4,11 +4,11 @@ import Input from '../components/atoms/Input';
 import Button from '../components/atoms/Button';
 
 export default {
-  title: 'Atoms/Input',
+  title: 'Atomes/Champ de saisie',
   component: Input,
   args: {
-    placeholder: 'Type an answer…',
-    'aria-label': 'Example input',
+    placeholder: 'Saisissez une réponse…',
+    'aria-label': 'Exemple de champ',
     variant: 'default',
     size: 'md',
     fullWidth: true,
@@ -28,65 +28,89 @@ export default {
     resize: { control: 'select', options: [undefined, 'none', 'vertical', 'horizontal', 'both'] },
     htmlSize: {
       control: 'number',
-      description: 'Native size attribute; visual sizing uses size instead.',
+      description: 'Attribut HTML size ; la taille visuelle utilise la propriété size.',
     },
     options: {
       control: 'object',
       description:
-        'Optional select options: { value, label, disabled }[]. Children take precedence.',
+        'Options de sélection facultatives : { value, label, disabled }[]. Les enfants sont prioritaires.',
     },
     ref: { control: false },
     className: { control: 'text' },
   },
 };
 
-export const Default = {};
-export const Filled = { args: { variant: 'filled' } };
-export const Description = { args: { as: 'textarea', rows: 4, placeholder: 'Add a few details…' } };
+export const Default = { name: 'Par défaut' };
+export const Filled = { name: 'Fond rempli', args: { variant: 'filled' } };
+export const Description = {
+  args: { as: 'textarea', rows: 4, placeholder: 'Ajoutez quelques détails…' },
+};
 export const Select = {
+  name: 'Liste de sélection',
   args: {
     as: 'select',
     defaultValue: 'medium',
     children: (
       <>
-        <option value="high">High</option>
-        <option value="medium">Medium</option>
-        <option value="low">Low</option>
+        <option value="high">Élevé</option>
+        <option value="medium">Moyen</option>
+        <option value="low">Faible</option>
       </>
     ),
   },
 };
-export const DueDate = { args: { type: 'date', defaultValue: '2026-10-28' } };
-export const Invalid = { args: { 'aria-invalid': true, defaultValue: 'Invalid example' } };
-export const Disabled = { args: { disabled: true } };
-export const Underline = { args: { variant: 'underline' } };
-export const ReadOnly = { args: { readOnly: true, defaultValue: 'Read-only answer' } };
+export const DueDate = { name: 'Date', args: { type: 'date', defaultValue: '2026-10-28' } };
+export const Invalid = {
+  name: 'Invalide',
+  args: { 'aria-invalid': true, defaultValue: 'Exemple invalide' },
+};
+export const Disabled = { name: 'Désactivé', args: { disabled: true } };
+export const Underline = { name: 'Souligné', args: { variant: 'underline' } };
+export const ReadOnly = {
+  name: 'Lecture seule',
+  args: { readOnly: true, defaultValue: 'Réponse en lecture seule' },
+};
 export const RequiredEmail = {
+  name: 'Courriel obligatoire',
   args: {
     type: 'email',
     name: 'email',
     autoComplete: 'email',
     required: true,
-    placeholder: 'you@example.com',
+    placeholder: 'vous@exemple.fr',
   },
 };
-export const Numeric = { args: { type: 'number', min: 1, max: 10, step: 1, defaultValue: 5 } };
-export const Password = { args: { type: 'password', autoComplete: 'new-password', minLength: 8 } };
-export const WithValidationState = { args: { invalid: true, defaultValue: 'Incorrect answer' } };
-export const FixedTextarea = { args: { as: 'textarea', resize: 'none', rows: 4, maxLength: 500 } };
+export const Numeric = {
+  name: 'Nombre',
+  args: { type: 'number', min: 1, max: 10, step: 1, defaultValue: 5 },
+};
+export const Password = {
+  name: 'Mot de passe',
+  args: { type: 'password', autoComplete: 'new-password', minLength: 8 },
+};
+export const WithValidationState = {
+  name: 'Avec validation',
+  args: { invalid: true, defaultValue: 'Mauvaise réponse' },
+};
+export const FixedTextarea = {
+  name: 'Zone de texte fixe',
+  args: { as: 'textarea', resize: 'none', rows: 4, maxLength: 500 },
+};
 export const Compact = { args: { size: 'xs', fullWidth: false, htmlSize: 12 } };
 export const SelectFromOptions = {
+  name: 'Liste à partir des options',
   args: {
     as: 'select',
     defaultValue: 'medium',
     options: [
-      { value: 'high', label: 'High' },
-      { value: 'medium', label: 'Medium' },
-      { value: 'low', label: 'Low', disabled: true },
+      { value: 'high', label: 'Élevé' },
+      { value: 'medium', label: 'Moyen' },
+      { value: 'low', label: 'Faible', disabled: true },
     ],
   },
 };
 export const MultipleSelect = {
+  name: 'Sélection multiple',
   args: {
     ...SelectFromOptions.args,
     multiple: true,
@@ -95,12 +119,13 @@ export const MultipleSelect = {
   },
 };
 export const FocusWithRef = {
+  name: 'Focus avec ref',
   render: function Render(args) {
     const ref = useRef(null);
     return (
       <>
         <Button variant="secondary" onClick={() => ref.current?.focus()}>
-          Focus input
+          Placer le focus sur le champ
         </Button>
         <Input {...args} ref={ref} />
       </>

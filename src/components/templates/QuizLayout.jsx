@@ -17,16 +17,16 @@ export default function QuizLayout({
   return (
     <div className={styles.base}>
       <a href="#main-content" className="sr-only skip-link">
-        Skip to quiz
+        Aller au quiz
       </a>
       <header className={styles.header}>
         <div className={styles.headerInner}>
-          <Link to="/" className={styles.brand} aria-label="QuizApp home">
+          <Link to="/" className={styles.brand} aria-label="Accueil QuizApp">
             <img src={brand} width="56" height="56" alt="" />
             <h1>QuizApp</h1>
           </Link>
           <IconButton
-            label={`Switch to ${theme === 'light' ? 'dark' : 'light'} theme`}
+            label={`Activer le thème ${theme === 'light' ? 'sombre' : 'clair'}`}
             pressed={theme === 'dark'}
             onClick={onToggleTheme}
             className={styles.themeToggle}
@@ -49,12 +49,12 @@ export default function QuizLayout({
         <span>
           <span className={`${styles.dot} ${storageError ? styles.warningDot : ''}`} />
           {!loaded
-            ? 'Preparing your quiz…'
+            ? 'Préparation de votre quiz…'
             : storageError
-              ? 'Storage unavailable · this session only'
-              : 'Your progress is saved on this device'}
+              ? 'Stockage indisponible · session en cours uniquement'
+              : 'Votre progression est enregistrée sur cet appareil'}
         </span>
-        <span>One question. One step forward.</span>
+        <span>Une question, un pas de plus.</span>
       </footer>
     </div>
   );

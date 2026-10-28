@@ -1,30 +1,32 @@
 import { Meta } from '@storybook/addon-docs/blocks';
 
-<Meta title="Configure your project" />
+<Meta title="Configurer le projet" />
 
-# QuizApp component library
+# Bibliothèque de composants QuizApp
 
-A focused React quiz, built with the same Atomic Design structure as the adjacent Todo List project.
+Un quiz React organisé selon la même architecture Atomic Design que le projet Todo List voisin.
 
-## Explore the system
+## Explorer les composants
 
-- **Atoms:** Button, IconButton, Input, Checkbox, and Badge retain the Todo List public APIs, native props, refs, variants, sizes, radii, and custom classes. See **Atoms / Props reference**.
-- **Molecules:** native radio answers, question navigation items, countdown timer, answer statistics, accessible dialog, and question review.
-- **Organisms:** the question navigator, question card, quiz summary, and final results.
-- **Templates:** the complete responsive quiz layout. Select answers and navigate to explore the interaction without changing a real attempt.
+- **Atomes :** Button, IconButton, Input, Checkbox et Badge conservent leurs API publiques, attributs HTML, références, variantes, tailles, arrondis et classes personnalisées. Consultez **Atomes / Référence des propriétés**.
+- **Molécules :** choix de réponse natifs, liens de navigation entre les questions, compte à rebours, fenêtre modale accessible et corrigé de question.
+- **Organismes :** navigation des questions, carte de question, suivi du quiz et résultats.
+- **Modèles :** disposition complète et adaptative du quiz. Sélectionnez des réponses et naviguez sans modifier votre véritable tentative.
 
-Use the **Theme** toolbar for light and dark previews. Controls expose configurable props; interactions appear in the Actions panel. The Accessibility panel supports inspection of each story.
+Utilisez le menu **Thème** pour afficher les versions claire et sombre. Les contrôles permettent de modifier les propriétés ; les interactions sont consignées dans le panneau des actions. Le panneau d’accessibilité permet d’inspecter chaque exemple.
 
-## Design and accessibility
+## Style et accessibilité
 
-All visual components have a JSX file and a CSS Module. Shared colors, spacing, typography, radii, motion, and control dimensions live in `src/styles/tokens.css`. Atoms have no quiz state or API dependencies.
+Chaque composant visuel possède un fichier JSX et un module CSS. Les couleurs, espacements, tailles de texte, arrondis, animations et dimensions des contrôles sont centralisés dans `src/styles/tokens.css`. Les atomes sont indépendants de l’état du quiz et de l’API.
 
-Answers use native radio controls: Tab enters the group, arrow keys select another answer, and Space selects the focused answer. Dialogs use the native modal dialog for focus trapping, Escape handling, and focus restoration. Timer updates do not interrupt screen readers every second. Reduced-motion preferences are respected.
+Les réponses utilisent des boutons radio natifs : Tab entre dans le groupe, les flèches changent la sélection et Espace sélectionne la réponse ciblée. Les fenêtres modales natives contiennent le focus, se ferment avec Échap et restaurent le focus à la fermeture. Le compte à rebours n’interrompt pas les lecteurs d’écran chaque seconde. Les préférences de réduction des animations sont respectées.
 
-## State and mock API
+## État et API simulée
 
-`quizModel.js` validates data and defines immutable transitions and derived statistics. `quizStore.js` owns the current attempt, versioned browser persistence, and the deadline. `useQuiz.js` integrates it through `useSyncExternalStore`. Components receive data and callbacks through props.
+`quizModel.js` valide les données et définit les transitions immuables, les calculs de durée et les statistiques finales. `quizStore.js` gère la tentative, le stockage local versionné et l’échéance. `useQuiz.js` relie React au magasin avec `useSyncExternalStore`. Les composants reçoivent leurs données et fonctions de rappel par leurs propriétés.
 
-Run `npm run start:mock` to serve the bundled fixture through WireMock on port 8080. The app also works without WireMock. Its POST endpoint only acknowledges a submission; saved answers and results belong to localStorage, not a server database.
+Tous les textes de l’application et des exemples sont en français. Les anciennes tentatives compatibles sont traduites à la restauration en conservant les réponses, la question actuelle et l’échéance. Les noms techniques des propriétés, variantes et API restent inchangés.
 
-See the repository README for setup, configuration, commands, and the complete verification checklist.
+Lancez `npm run start:mock` pour servir les questions avec WireMock sur le port 8080. L’application fonctionne également sans WireMock grâce aux données intégrées. Le point d’accès POST accuse uniquement réception : les réponses et résultats sont conservés dans localStorage, sans base de données distante.
+
+Le README du projet présente l’installation, la configuration, les commandes et la liste des vérifications.

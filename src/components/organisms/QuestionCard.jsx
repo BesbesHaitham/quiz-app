@@ -3,6 +3,7 @@ import { ArrowLeft, ArrowRight, Check } from 'lucide-react';
 import Badge from '../atoms/Badge';
 import Button from '../atoms/Button';
 import AnswerOption from '../molecules/AnswerOption';
+import { DIFFICULTY_LABELS } from '../../store/quizModel';
 import styles from './QuestionCard.module.css';
 
 export default function QuestionCard({
@@ -26,20 +27,20 @@ export default function QuestionCard({
     <section className={styles.base} aria-labelledby="question-title">
       <div className={styles.badges}>
         <Badge size="lg" className={styles.questionBadge}>
-          Question {index + 1} of {total}
+          Question {index + 1} sur {total}
         </Badge>
         <Badge
           size="lg"
           className={`${styles.difficulty} ${styles[question.difficulty.toLowerCase()]}`}
         >
-          {question.difficulty}
+          {DIFFICULTY_LABELS[question.difficulty]}
         </Badge>
       </div>
       <h2 id="question-title" className={styles.title} ref={titleRef} tabIndex={-1}>
         {question.text}
       </h2>
       <fieldset className={styles.options} key={question.id}>
-        <legend className="sr-only">Choose one answer for: {question.text}</legend>
+        <legend className="sr-only">Choisissez une réponse : {question.text}</legend>
         {question.options.map((option, optionIndex) => (
           <AnswerOption
             key={optionIndex}
@@ -60,11 +61,11 @@ export default function QuestionCard({
           startIcon={<ArrowLeft />}
           className={styles.previous}
         >
-          Previous
+          Précédent
         </Button>
         {index === total - 1 ? (
           <Button size="lg" onClick={onFinish} endIcon={<Check />} className={styles.next}>
-            Finish Quiz
+            Terminer le quiz
           </Button>
         ) : (
           <Button
@@ -73,7 +74,7 @@ export default function QuestionCard({
             endIcon={<ArrowRight />}
             className={styles.next}
           >
-            Next
+            Suivant
           </Button>
         )}
       </div>

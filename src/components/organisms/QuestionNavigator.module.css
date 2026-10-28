@@ -11,13 +11,13 @@
   border-bottom: 1px solid var(--color-border);
 }
 .header h2 {
-  font-size: 1.5rem;
+  font-size: var(--font-xl);
   font-weight: 650;
   letter-spacing: -0.7px;
 }
 .header p {
   margin-top: var(--space-1);
-  font-size: var(--font-md);
+  font-size: var(--font-sm);
   color: var(--color-muted);
 }
 .progressRow {
@@ -31,7 +31,7 @@
   font-weight: 600;
 }
 .track {
-  height: 9px;
+  height: 6px;
   width: 100%;
   overflow: hidden;
   border-radius: var(--radius-full);
@@ -45,7 +45,7 @@
   transition: width var(--transition-normal);
 }
 .nav {
-  padding: var(--space-2) var(--space-3) var(--space-8);
+  padding: var(--space-1) var(--space-2) var(--space-3);
 }
 .nav ol {
   list-style: none;

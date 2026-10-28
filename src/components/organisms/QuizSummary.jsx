@@ -1,14 +1,12 @@
 import { Square } from 'lucide-react';
 import Button from '../atoms/Button';
 import CountdownTimer from '../molecules/CountdownTimer';
-import AnswerStatistics from '../molecules/AnswerStatistics';
 import styles from './QuizSummary.module.css';
 
-export default function QuizSummary({ remaining, duration, statistics, onFinish }) {
+export default function QuizSummary({ remaining, duration, onFinish }) {
   return (
-    <aside className={styles.base} aria-label="Quiz status">
+    <aside className={styles.base} aria-label="État du quiz">
       <CountdownTimer remaining={remaining} duration={duration} />
-      <AnswerStatistics {...statistics} />
       <div className={styles.finish}>
         <Button
           fullWidth
@@ -18,7 +16,7 @@ export default function QuizSummary({ remaining, duration, statistics, onFinish 
           startIcon={<Square fill="currentColor" size={16} />}
           onClick={onFinish}
         >
-          Finish Quiz
+          Terminer le quiz
         </Button>
       </div>
     </aside>

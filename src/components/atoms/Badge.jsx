@@ -2,7 +2,7 @@ import { X } from 'lucide-react';
 import styles from './Badge.module.css';
 import utilities from '../../styles/atomUtilities.module.css';
 
-/** Status, category or count indicator with optional keyboard-accessible removal. */
+/** Indicateur d’état, de catégorie ou de nombre avec suppression facultative accessible au clavier. */
 export default function Badge({
   variant = 'neutral',
   size = 'md',
@@ -13,7 +13,7 @@ export default function Badge({
   endIcon,
   label,
   onRemove,
-  removeLabel = 'Remove badge',
+  removeLabel = 'Supprimer le badge',
   disabled = false,
   id,
   title,

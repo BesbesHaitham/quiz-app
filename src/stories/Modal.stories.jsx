@@ -4,18 +4,19 @@ import Modal from '../components/molecules/Modal';
 import Button from '../components/atoms/Button';
 
 export default {
-  title: 'Molecules/Modal',
+  title: 'Molécules/Fenêtre modale',
   component: Modal,
   args: {
-    title: 'Ready to finish?',
-    description: 'You have 8 unanswered questions. You can still go back and give them a try.',
+    title: 'Terminer le quiz ?',
+    description:
+      'Il reste 8 questions sans réponse. Vous pouvez encore revenir en arrière pour y répondre.',
     onClose: fn(),
   },
   parameters: {
     docs: {
       description: {
         component:
-          'Native dialog with focus trapping, Escape/backdrop dismissal, labelled content, scroll locking, and focus restoration.',
+          'Fenêtre modale native avec focus contenu dans la fenêtre, fermeture par Échap ou clic extérieur, contenu étiqueté, défilement bloqué et restauration du focus.',
       },
     },
   },
@@ -23,7 +24,7 @@ export default {
     const [open, setOpen] = useState(false);
     return (
       <>
-        <Button onClick={() => setOpen(true)}>Open finish confirmation</Button>
+        <Button onClick={() => setOpen(true)}>Ouvrir la confirmation de fin</Button>
         {open && (
           <Modal
             {...args}
@@ -33,7 +34,7 @@ export default {
             }}
           >
             <Button variant="secondary" onClick={() => setOpen(false)}>
-              Keep going
+              Continuer
             </Button>
           </Modal>
         )}
@@ -41,4 +42,4 @@ export default {
     );
   },
 };
-export const FinishConfirmation = {};
+export const FinishConfirmation = { name: 'Confirmation de fin' };

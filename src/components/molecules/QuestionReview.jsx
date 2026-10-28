@@ -5,7 +5,7 @@ import styles from './QuestionReview.module.css';
 export default function QuestionReview({ question, index, answer }) {
   const answered = Number.isInteger(answer);
   const correct = answered && answer === question.correctIndex;
-  const label = answered ? (correct ? 'Correct' : 'Incorrect') : 'Not answered';
+  const label = answered ? (correct ? 'Bonne réponse' : 'Mauvaise réponse') : 'Sans réponse';
   return (
     <article className={styles.base} aria-labelledby={`review-${question.id}`}>
       <div className={styles.heading}>
@@ -32,10 +32,10 @@ export default function QuestionReview({ question, index, answer }) {
               {isCorrect && (
                 <span className={styles.annotation}>
                   <Check size={16} />
-                  Correct answer
+                  Bonne réponse
                 </span>
               )}
-              {selected && <span className={styles.annotation}>Your answer</span>}
+              {selected && <span className={styles.annotation}>Votre réponse</span>}
             </li>
           );
         })}

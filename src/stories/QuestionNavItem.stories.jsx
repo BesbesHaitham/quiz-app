@@ -3,13 +3,10 @@ import QuestionNavItem from '../components/molecules/QuestionNavItem';
 import { sampleQuestion } from './storyData';
 
 export default {
-  title: 'Molecules/QuestionNavItem',
+  title: 'Molécules/Lien de question',
   component: QuestionNavItem,
   parameters: { frame: 'card' },
-  args: { question: sampleQuestion, index: 2, active: false, answer: undefined, onClick: fn() },
-  argTypes: { answer: { control: 'select', options: [undefined, 0, 1, 2, 3] } },
+  args: { question: sampleQuestion, index: 2, active: false, onClick: fn() },
 };
-export const Unanswered = {};
-export const Current = { args: { active: true } };
-export const Correct = { args: { answer: 2 } };
-export const Incorrect = { args: { answer: 0 } };
+export const Default = { name: 'Par défaut' };
+export const Current = { name: 'Question actuelle', args: { active: true } };

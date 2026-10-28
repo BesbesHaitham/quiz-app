@@ -3,7 +3,7 @@ import QuestionCard from '../components/organisms/QuestionCard';
 import { sampleQuestion, questionActions } from './storyData';
 
 export default {
-  title: 'Organisms/QuestionCard',
+  title: 'Organismes/Carte de question',
   component: QuestionCard,
   args: { question: sampleQuestion, index: 2, total: 10, answer: undefined, ...questionActions() },
   render: function Render(args) {
@@ -19,7 +19,7 @@ export default {
     );
   },
 };
-export const Unanswered = {};
-export const Selected = { args: { answer: 2 } };
-export const FirstQuestion = { args: { index: 0 } };
-export const LastQuestion = { args: { index: 9 } };
+export const Unanswered = { name: 'Sans réponse' };
+export const Selected = { name: 'Sélectionné', args: { answer: 2 } };
+export const FirstQuestion = { name: 'Première question', args: { index: 0 } };
+export const LastQuestion = { name: 'Dernière question', args: { index: 9 } };

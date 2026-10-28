@@ -4,7 +4,7 @@ import QuestionNavigator from '../components/organisms/QuestionNavigator';
 import { sampleQuiz, sampleAttempt } from './storyData';
 
 export default {
-  title: 'Organisms/QuestionNavigator',
+  title: 'Organismes/Navigation des questions',
   component: QuestionNavigator,
   parameters: { frame: 'card' },
   args: { quiz: sampleQuiz, answers: sampleAttempt.answers, currentIndex: 2, onNavigate: fn() },
@@ -21,6 +21,9 @@ export default {
     );
   },
 };
-export const InProgress = {};
-export const FreshAttempt = { args: { answers: {}, currentIndex: 0 } };
-export const MixedAnswers = { args: { answers: { react: 0, components: 0, state: 1 } } };
+export const InProgress = { name: 'En cours' };
+export const FreshAttempt = { name: 'Nouvelle tentative', args: { answers: {}, currentIndex: 0 } };
+export const MixedAnswers = {
+  name: 'Progression partielle',
+  args: { answers: { react: 0, components: 0, state: 1 } },
+};

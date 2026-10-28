@@ -3,11 +3,11 @@ import { fn } from 'storybook/test';
 import Checkbox from '../components/atoms/Checkbox';
 
 export default {
-  title: 'Atoms/Checkbox',
+  title: 'Atomes/Case à cocher',
   component: Checkbox,
   args: {
     checked: false,
-    'aria-label': 'Include this answer',
+    'aria-label': 'Inclure cette réponse',
     variant: 'default',
     size: 'md',
     indeterminate: false,
@@ -38,19 +38,20 @@ export default {
   },
 };
 
-export const Unchecked = {};
-export const Checked = { args: { checked: true } };
-export const Primary = { args: { checked: true, variant: 'primary' } };
-export const Small = { args: { size: 'sm' } };
-export const Large = { args: { size: 'lg' } };
-export const Disabled = { args: { disabled: true } };
-export const Indeterminate = { args: { indeterminate: true } };
+export const Unchecked = { name: 'Non coché' };
+export const Checked = { name: 'Coché', args: { checked: true } };
+export const Primary = { name: 'Principal', args: { checked: true, variant: 'primary' } };
+export const Small = { name: 'Petit', args: { size: 'sm' } };
+export const Large = { name: 'Grand', args: { size: 'lg' } };
+export const Disabled = { name: 'Désactivé', args: { disabled: true } };
+export const Indeterminate = { name: 'Indéterminé', args: { indeterminate: true } };
 export const Danger = { args: { variant: 'danger', checked: true } };
-export const Invalid = { args: { invalid: true, required: true } };
-export const Rounded = { args: { radius: 'full', checked: true } };
-export const ExtraSmall = { args: { size: 'xs' } };
-export const ExtraLarge = { args: { size: 'xl', checked: true } };
+export const Invalid = { name: 'Invalide', args: { invalid: true, required: true } };
+export const Rounded = { name: 'Arrondi', args: { radius: 'full', checked: true } };
+export const ExtraSmall = { name: 'Très petit', args: { size: 'xs' } };
+export const ExtraLarge = { name: 'Très grand', args: { size: 'xl', checked: true } };
 export const Uncontrolled = {
+  name: 'Non contrôlé',
   args: { checked: undefined, defaultChecked: true, name: 'answer', value: 'a' },
   render: (args) => <Checkbox {...args} />,
 };

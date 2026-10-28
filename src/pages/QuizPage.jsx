@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { useQuiz } from '../store/useQuiz';
 import { useTheme } from '../store/useTheme';
-import { getStatistics, remainingSeconds } from '../store/quizModel';
+import { remainingSeconds } from '../store/quizModel';
 import QuizLayout from '../components/templates/QuizLayout';
 import QuestionNavigator from '../components/organisms/QuestionNavigator';
 import QuestionCard from '../components/organisms/QuestionCard';
@@ -22,21 +22,22 @@ export default function QuizPage() {
       <QuizLayout {...layoutProps}>
         <div className={styles.loading} role="status">
           <span />
-          Getting your quiz ready…
+          Préparation de votre quiz…
         </div>
       </QuizLayout>
     );
-  const statistics = getStatistics(attempt.quiz, attempt.answers);
+  const total = attempt.quiz.questions.length;
+  const unanswered = total - Object.keys(attempt.answers).length;
   const question = attempt.quiz.questions[attempt.currentIndex];
   const navigate = (index) => dispatch({ type: 'navigate', index });
   const finish = () => {
-    if (statistics.unanswered > 0) setConfirmFinish(true);
+    if (unanswered > 0) setConfirmFinish(true);
     else dispatch({ type: 'finish' });
   };
   const warning = storageError
-    ? 'Your browser could not save your progress. Enable site storage to keep this attempt after closing the page.'
+    ? 'Votre navigateur n’a pas pu enregistrer votre progression. Autorisez le stockage du site pour conserver cette tentative après la fermeture de la page.'
     : recovered
-      ? 'The saved attempt could not be restored. A fresh quiz is ready for you.'
+      ? 'La tentative enregistrée n’a pas pu être restaurée. Un nouveau quiz est prêt.'
       : null;
   return (
     <>
@@ -71,7 +72,7 @@ export default function QuizPage() {
             <QuestionCard
               question={question}
               index={attempt.currentIndex}
-              total={statistics.total}
+              total={total}
               answer={attempt.answers[question.id]}
               onAnswer={(optionIndex) =>
                 dispatch({ type: 'answer', questionId: question.id, optionIndex })
@@ -84,7 +85,6 @@ export default function QuizPage() {
             <QuizSummary
               remaining={remainingSeconds(attempt, now)}
               duration={attempt.durationSeconds}
-              statistics={statistics}
               onFinish={finish}
             />
           }
@@ -92,17 +92,17 @@ export default function QuizPage() {
       )}
       {confirmFinish && attempt.status === 'active' && (
         <Modal
-          title="Ready to finish?"
-          description={`You have ${statistics.unanswered} unanswered ${statistics.unanswered === 1 ? 'question' : 'questions'}. You can still go back and give them a try.`}
+          title="Terminer le quiz ?"
+          description={`Il reste ${unanswered} ${unanswered === 1 ? 'question sans réponse' : 'questions sans réponse'}. Vous pouvez encore revenir en arrière pour y répondre.`}
           onClose={() => setConfirmFinish(false)}
         >
           <p className={styles.confirmDescription}>
-            Finishing will save your result and open your answer review. Unanswered questions earn
-            no points.
+            En terminant, votre résultat sera enregistré et vous pourrez consulter le corrigé. Les
+            questions sans réponse ne rapportent aucun point.
           </p>
           <div className={styles.dialogActions}>
             <Button variant="secondary" onClick={() => setConfirmFinish(false)}>
-              Keep going
+              Continuer
             </Button>
             <Button
               onClick={() => {
@@ -111,7 +111,7 @@ export default function QuizPage() {
               }}
               endIcon={<ArrowRight />}
             >
-              Finish Quiz
+              Terminer le quiz
             </Button>
           </div>
         </Modal>

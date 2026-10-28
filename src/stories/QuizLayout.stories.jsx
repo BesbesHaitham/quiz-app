@@ -5,11 +5,10 @@ import QuizLayout from '../components/templates/QuizLayout';
 import QuestionNavigator from '../components/organisms/QuestionNavigator';
 import QuestionCard from '../components/organisms/QuestionCard';
 import QuizSummary from '../components/organisms/QuizSummary';
-import { getStatistics } from '../store/quizModel';
 import { sampleQuiz, sampleAttempt } from './storyData';
 
 export default {
-  title: 'Templates/QuizLayout',
+  title: 'Modèles/Disposition du quiz',
   component: QuizLayout,
   parameters: { layout: 'fullscreen', frame: 'board' },
   args: { currentIndex: 2, answers: sampleAttempt.answers, onFinish: fn(), onToggleTheme: fn() },
@@ -47,19 +46,12 @@ export default {
               onFinish={args.onFinish}
             />
           }
-          summary={
-            <QuizSummary
-              duration={600}
-              remaining={504}
-              statistics={getStatistics(sampleQuiz, args.answers)}
-              onFinish={args.onFinish}
-            />
-          }
+          summary={<QuizSummary duration={600} remaining={504} onFinish={args.onFinish} />}
         />
       </MemoryRouter>
     );
   },
 };
-export const InProgress = {};
-export const FreshAttempt = { args: { currentIndex: 0, answers: {} } };
-export const Dark = { globals: { theme: 'dark' } };
+export const InProgress = { name: 'En cours' };
+export const FreshAttempt = { name: 'Nouvelle tentative', args: { currentIndex: 0, answers: {} } };
+export const Dark = { name: 'Thème sombre', globals: { theme: 'dark' } };

@@ -19,40 +19,41 @@ export default function QuizResults({ attempt, onRestart }) {
         <div className={styles.trophy}>
           <Trophy size={30} aria-hidden="true" />
         </div>
-        <Badge variant="primary">{attempt.quiz.title} · Results</Badge>
+        <Badge variant="primary">{attempt.quiz.title} · Résultats</Badge>
         <h2 id="results-title" ref={titleRef} tabIndex={-1}>
-          A little wiser. A step ahead.
+          Un pas de plus dans votre apprentissage.
         </h2>
         <p>
           {attempt.reason === 'expired'
-            ? 'Time’s up! Your answers were submitted automatically.'
-            : 'Quiz complete! Here’s how you did.'}
+            ? 'Temps écoulé ! Vos réponses ont été envoyées automatiquement.'
+            : 'Quiz terminé ! Découvrez vos résultats.'}
         </p>
         <div className={styles.score}>
           <strong>
             {statistics.percentage}
-            <span>%</span>
+            <span> %</span>
           </strong>
           <span>
-            {statistics.correct} out of {statistics.total} correct
+            {statistics.correct} {statistics.correct === 1 ? 'bonne réponse' : 'bonnes réponses'}{' '}
+            sur {statistics.total}
           </span>
         </div>
         <div className={styles.statistics}>
           <div>
             <strong className={styles.correct}>{statistics.correct}</strong>
-            <span>Correct</span>
+            <span>Bonnes réponses</span>
           </div>
           <div>
             <strong className={styles.incorrect}>{statistics.incorrect}</strong>
-            <span>Incorrect</span>
+            <span>Mauvaises réponses</span>
           </div>
           <div>
             <strong>{statistics.unanswered}</strong>
-            <span>Not answered</span>
+            <span>Sans réponse</span>
           </div>
           <div>
             <strong>{formatTime(elapsed)}</strong>
-            <span>Time taken</span>
+            <span>Temps passé</span>
           </div>
         </div>
         <div className={styles.actions}>
@@ -67,17 +68,17 @@ export default function QuizResults({ attempt, onRestart }) {
               })
             }
           >
-            Review answers
+            Voir le corrigé
           </Button>
           <Button startIcon={<RotateCcw />} onClick={onRestart}>
-            Restart Quiz
+            Recommencer
           </Button>
         </div>
       </section>
       <section className={styles.review} id="question-review" aria-labelledby="review-title">
         <div className={styles.reviewHeading}>
-          <h2 id="review-title">Let’s break it down</h2>
-          <p>Every question is a chance to learn something new.</p>
+          <h2 id="review-title">Le corrigé en détail</h2>
+          <p>Chaque question est une occasion d’apprendre.</p>
         </div>
         {attempt.quiz.questions.map((question, index) => (
           <QuestionReview

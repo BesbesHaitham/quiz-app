@@ -7,5 +7,6 @@ export default {
     '@storybook/addon-mcp',
   ],
   framework: '@storybook/react-vite',
+  docs: { defaultName: 'Documentation' },
   core: { disableTelemetry: true },
 };

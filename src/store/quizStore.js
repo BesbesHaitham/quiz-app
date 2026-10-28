@@ -1,6 +1,7 @@
 import { fallbackQuiz, quizApi } from '../services/quizApi';
 import {
   createAttempt,
+  localizeQuiz,
   quizReducer,
   STORAGE_KEY,
   STORAGE_VERSION,
@@ -42,7 +43,8 @@ export function createQuizStore({
     const data = JSON.parse(raw);
     if (data?.version !== STORAGE_VERSION || !validAttempt(data.attempt))
       throw new Error('Invalid saved attempt');
-    return data.attempt;
+    const quiz = localizeQuiz(data.attempt.quiz, seed);
+    return quiz === data.attempt.quiz ? data.attempt : { ...data.attempt, quiz };
   };
   const acknowledge = (attempt) => {
     // A static mock acknowledges receipt; local state remains authoritative even offline.
@@ -92,14 +94,19 @@ export function createQuizStore({
           storageError = !recovered;
         }
         if (saved) {
-          publish({ attempt: saved, loaded: true, now: now(), storageError });
+          publish({
+            attempt: saved,
+            loaded: true,
+            now: now(),
+            storageError: persist(saved) || storageError,
+          });
           tick();
           return;
         }
         let quiz = seed;
         try {
           const remote = await api.getQuiz();
-          if (validQuiz(remote)) quiz = remote;
+          if (validQuiz(remote)) quiz = localizeQuiz(remote, seed);
         } catch {
           /* Bundled fixture supports a first run without WireMock. */
         }
@@ -130,7 +137,7 @@ export function createQuizStore({
       try {
         const saved = read();
         if (saved && JSON.stringify(saved) !== JSON.stringify(state.attempt)) {
-          publish({ attempt: saved, now: now(), storageError: false });
+          publish({ attempt: saved, now: now(), storageError: persist(saved) });
           tick();
         }
       } catch {

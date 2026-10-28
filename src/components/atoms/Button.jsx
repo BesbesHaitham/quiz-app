@@ -1,7 +1,7 @@
 import styles from './Button.module.css';
 import utilities from '../../styles/atomUtilities.module.css';
 
-/** Native button attributes, events, aria-*, data-* and ref are forwarded. */
+/** Les attributs HTML, événements, aria-*, data-* et ref sont transmis au bouton natif. */
 export default function Button({
   variant = 'primary',
   size = 'md',

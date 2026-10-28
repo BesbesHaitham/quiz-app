@@ -1,19 +1,19 @@
 # QuizApp
 
-A complete React Basics quiz in JavaScript and JSX. The interface follows the supplied three-panel reference: question navigator, question and answers, and a countdown with live statistics. It adapts the architecture, component APIs, theme conventions, and development tooling of `../todo-list/`. The original project is not modified.
+Un quiz complet sur les bases de React, écrit en JavaScript et JSX, avec une interface entièrement en français. Trois panneaux regroupent la navigation des questions, la question et ses réponses, puis le compte à rebours et le bouton de fin. Le projet reprend l’architecture, les API des composants, les thèmes et les outils de `../todo-list/`. Le projet d’origine n’est pas modifié.
 
-## Get started
+## Installation
 
-Use Node.js 22.12+ (or a newer supported LTS release), npm, and Java 17+ for WireMock.
+Utilisez Node.js 22.12 ou une version LTS plus récente prise en charge, npm et Java 17 ou supérieur pour WireMock.
 
 ```sh
 npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite. WireMock is optional: the first attempt loads the bundled quiz fixture if the API is unavailable or invalid. An existing saved attempt restores immediately without a network request.
+Ouvrez l’adresse locale affichée par Vite. WireMock est facultatif : si l’API est indisponible ou renvoie des données invalides, la première tentative utilise les questions intégrées. Une tentative déjà enregistrée est restaurée immédiatement, sans requête réseau.
 
-Copy `.env.example` to `.env.local` to customize the API or quiz duration, then restart Vite:
+Copiez `.env.example` vers `.env.local` pour personnaliser l’API ou la durée, puis redémarrez Vite :
 
 ```dotenv
 VITE_API_BASE_URL=/api
@@ -21,93 +21,94 @@ VITE_API_PROXY_TARGET=http://127.0.0.1:8080
 VITE_QUIZ_DURATION_SECONDS=600
 ```
 
-The duration must be an integer between 1 and 86400 seconds. It applies when creating a new attempt; an existing attempt and its restarts keep their saved duration. To apply a different duration to an existing installation, finish the attempt and remove the `quiz-attempt:v1` entry in browser storage before reloading. Without an override, the quiz fixture controls the duration. `VITE_*` values are public configuration; never use them for secrets.
+La durée doit être un entier compris entre 1 et 86400 secondes. Elle s’applique aux nouvelles tentatives. Une tentative existante conserve sa durée, y compris lors d’un redémarrage du quiz. Pour appliquer une autre durée à une installation existante, terminez la tentative puis supprimez l’entrée `quiz-attempt:v1` du stockage du navigateur avant de recharger. Sans configuration explicite, la durée provient des données du quiz. Les variables `VITE_*` sont publiques : ne les utilisez jamais pour des secrets.
 
-## Commands
+## Commandes
 
-| Command                   | Purpose                                              |
-| ------------------------- | ---------------------------------------------------- |
-| `npm run dev`             | Start the Vite development server                    |
-| `npm run start:mock`      | Start the npm WireMock CLI on port 8080              |
-| `npm run build`           | Build the app into `dist/`                           |
-| `npm run preview`         | Serve the production build locally                   |
-| `npm run lint`            | Check JS/JSX using ESLint flat configuration         |
-| `npm run format`          | Apply the reference project's Prettier rules         |
-| `npm run format:check`    | Check formatting                                     |
-| `npm run storybook`       | Start Storybook on port 6006                         |
-| `npm run build-storybook` | Build the component library into `storybook-static/` |
+| Commande                  | Rôle                                                  |
+| ------------------------- | ----------------------------------------------------- |
+| `npm run dev`             | Démarrer le serveur de développement Vite             |
+| `npm run start:mock`      | Démarrer WireMock avec npm sur le port 8080           |
+| `npm run build`           | Compiler l’application dans `dist/`                   |
+| `npm run preview`         | Servir localement la version compilée                 |
+| `npm run lint`            | Vérifier le JS/JSX avec la configuration plate ESLint |
+| `npm run format`          | Appliquer les règles Prettier du projet de référence  |
+| `npm run format:check`    | Vérifier la mise en forme                             |
+| `npm run storybook`       | Démarrer Storybook sur le port 6006                   |
+| `npm run build-storybook` | Compiler la bibliothèque dans `storybook-static/`     |
 
 ## Architecture
 
 ```text
 src/
-  assets/                    Local brand SVG
+  assets/                    Logo SVG local
   components/
     atoms/                   Button, IconButton, Input, Checkbox, Badge
     molecules/               AnswerOption, QuestionNavItem, CountdownTimer,
-                             AnswerStatistics, Modal, QuestionReview
+                             Modal, QuestionReview
     organisms/               QuestionNavigator, QuestionCard, QuizSummary, QuizResults
-    templates/               QuizLayout: header, responsive slots, save status
-  pages/                     QuizPage: UI composition and finish confirmation
-  routes/                    BrowserRouter routes and unknown-route redirect
-  services/                  Native fetch helper, quiz retrieval and acknowledgement
-  store/                     Quiz model, reducer, external store, quiz/theme hooks
-  stories/                   All component stories and MDX documentation
-  styles/                    Central design tokens and shared atom utilities
+    templates/               QuizLayout : en-tête, disposition et état de sauvegarde
+  pages/                     QuizPage : composition et confirmation de fin
+  routes/                    Routes BrowserRouter et redirection des URL inconnues
+  services/                  Requêtes fetch, récupération du quiz et accusé de réception
+  store/                     Modèle, réducteur, magasin externe et hooks
+  stories/                   Exemples Storybook et documentation MDX
+  styles/                    Variables de thème et utilitaires partagés des atomes
 wiremock/
-  __files/react-basics.json   Shared API/bundled fixture (10 questions)
-  mappings/                  Static GET and POST stubs
-.storybook/                  React/Vite framework, themed frame and addons
+  __files/react-basics.json   Questions communes à l’API et au mode local
+  mappings/                  Réponses statiques GET et POST
+.storybook/                  Configuration React/Vite, thèmes et extensions
 ```
 
-Every visual component has its own `.jsx` and `.module.css`. UI components receive data and callbacks; they do not call the API or write storage. `quizModel.js` owns validation, immutable transitions, timing, and derived statistics. `createQuizStore()` owns persistence, subscriptions, initialization, and mock acknowledgements. It accepts injected API, storage, clock, ID generator, and duration for isolated verification. `useQuiz()` connects React through `useSyncExternalStore` and manages timer and storage event subscriptions.
+Chaque composant visuel possède ses propres fichiers `.jsx` et `.module.css`. Les composants reçoivent des données et des fonctions de rappel ; ils n’appellent pas l’API et n’écrivent pas dans le stockage. `quizModel.js` gère la validation, les transitions immuables, les durées, la traduction des anciennes données et les statistiques finales. `createQuizStore()` gère la persistance, les abonnements, l’initialisation et les accusés de réception. L’API, le stockage, l’horloge, le générateur d’identifiants et la durée sont injectables pour des vérifications isolées. `useQuiz()` relie React au magasin avec `useSyncExternalStore` et gère les événements de minuterie et de stockage.
 
-The generic atoms are copied from the reference project with their public APIs preserved, including native HTML attributes, events, React 19 refs, variants, five sizes, configurable radii, icons, loading states, and optional custom classes. Input supports native input/select/textarea, Checkbox supports indeterminate state, Badge supports removal, and IconButton supports accessible names and pressed state. Atom styles consume shared tokens rather than quiz-specific data.
+Les atomes génériques conservent les propriétés publiques du projet de référence : attributs HTML, événements, références React 19, variantes, cinq tailles, arrondis, icônes, chargement et classes personnalisées. Input accepte input, select et textarea ; Checkbox prend en charge l’état indéterminé ; Badge propose une suppression facultative ; IconButton gère le nom accessible et l’état de bascule. Les styles utilisent les variables communes du thème.
 
-## Quiz behavior and persistence
+## Fonctionnement et persistance
 
-- Ten meaningful questions with four choices each. Choose or change an answer, use Previous/Next, or jump directly to any question. The initial attempt starts at question one with no prefilled answers.
-- Progress counts answered questions. Correct, incorrect, and unanswered totals are derived from the answer map, so replacing an answer never double-counts it. As in the reference design, correctness is visible during the quiz.
-- The countdown uses an absolute saved deadline, not a persisted decrementing counter. Time continues while the tab is closed or inactive. Refresh restores the same deadline; a restored expired attempt submits immediately.
-- Every answer/navigation/finish action checks the deadline, including when a background tab has throttled timers. Automatic expiry closes the active quiz, including an open confirmation dialog, and records the deadline as the submission time.
-- Finish opens a native confirmation dialog when questions are unanswered. Fully answered quizzes finish immediately. Results include score, percentage, time taken, counts, all four options, the chosen and correct answers, and an explanation for every question. Unanswered questions earn no points.
-- Restart creates a fresh attempt with a new ID and deadline, clears answers, and returns to question one. Completed results survive refresh and cannot be edited.
-- The versioned localStorage envelope is `{ version: 1, attempt }` under `quiz-attempt:v1`. It stores the quiz snapshot, answer map, current index, timestamps, duration, submission reason, and status. Scores are recomputed from the saved answers and quiz, avoiding stale duplicated totals. The quiz snapshot keeps a restored attempt consistent even if the API fixture changes.
-- Validation rejects malformed quizzes, duplicate IDs, invalid option indices, inconsistent deadlines, invalid completion states, and incompatible storage versions. Unreadable saved data starts a fresh attempt with a notice. Blocked/full storage leaves the app usable in memory and displays a warning. Storage events synchronize valid saved attempts between open tabs; concurrent edits are last-write-wins, not collaborative merging.
-- Theme follows the reference hook pattern: initialize from `quiz-theme`, fall back to the OS preference, set `data-theme`, and persist changes. A small initial HTML script avoids a theme flash. Theme switching also works if storage is blocked.
+- Dix questions avec quatre propositions chacune. Sélectionnez ou modifiez une réponse, utilisez Précédent/Suivant ou choisissez directement une question. Une nouvelle tentative commence à la première question, sans réponse préremplie.
+- La progression compte les questions répondues. La liste affiche leurs numéros, leurs titres et la question actuelle. Les bonnes et mauvaises réponses sont indiquées dans les résultats finaux, calculés à partir des réponses enregistrées sans double comptage.
+- Le compte à rebours utilise une échéance absolue enregistrée. Le temps continue de s’écouler lorsque l’onglet est fermé ou inactif. Un rechargement conserve l’échéance ; une tentative déjà expirée est envoyée immédiatement.
+- Chaque sélection, navigation ou demande de fin vérifie l’échéance, même si le navigateur a ralenti les minuteries d’un onglet inactif. L’expiration termine le quiz, ferme une éventuelle confirmation et utilise l’échéance comme date de soumission.
+- Le bouton Terminer le quiz ouvre une confirmation lorsqu’il reste des questions sans réponse. Si toutes les questions sont répondues, le résultat s’affiche directement. Il comprend le score, le pourcentage, la durée, les totaux, les quatre choix, la réponse choisie, la bonne réponse et une explication pour chaque question. Une question sans réponse ne rapporte aucun point.
+- Recommencer crée un nouvel identifiant et une nouvelle échéance, efface les réponses et revient à la première question. Les résultats terminés sont conservés au rechargement et ne peuvent plus être modifiés.
+- localStorage conserve une enveloppe `{ version: 1, attempt }` sous `quiz-attempt:v1` : copie du quiz, réponses, question actuelle, dates, durée, motif de fin et statut. Les scores sont recalculés pour éviter les totaux dupliqués. La copie du quiz préserve la cohérence d’une tentative si l’API évolue.
+- Les anciennes copies anglaises du quiz compatible sont traduites en français lors de leur restauration. Les identifiants, l’ordre des questions et des choix, les indices des bonnes réponses, les réponses choisies, la question actuelle, les dates et la durée sont conservés. Les valeurs techniques de difficulté restent `Easy`, `Medium` et `Hard` ; leurs libellés affichés sont Facile, Moyen et Difficile.
+- La validation refuse les quiz mal formés, identifiants dupliqués, choix invalides, échéances incohérentes, statuts de fin invalides et versions de stockage incompatibles. Des données illisibles entraînent une nouvelle tentative accompagnée d’un message. Un stockage bloqué ou plein laisse le quiz utilisable en mémoire avec un avertissement. Les événements de stockage synchronisent les tentatives entre onglets ; en cas de modifications simultanées, la dernière écriture prévaut.
+- Le thème est initialisé depuis `quiz-theme` ou la préférence du système, appliqué avec `data-theme`, puis enregistré. Un script HTML initial évite un changement de thème visible au chargement. Le thème reste utilisable si le stockage est bloqué.
 
-This is a local practice quiz. The answer key is bundled and the timer uses the device clock; it is not a secure examination or server-backed assessment system. Clearing site storage removes the saved attempt. No account or remote result history is created.
+Ce quiz sert à s’entraîner localement. Les bonnes réponses sont intégrées au code et le temps dépend de l’horloge de l’appareil ; il ne s’agit pas d’un système d’examen sécurisé avec validation serveur. Effacer les données du site supprime la tentative. Aucun compte ni historique distant n’est créé.
 
 ## WireMock
 
-In a second terminal:
+Dans un second terminal :
 
 ```sh
 npm run start:mock
 ```
 
-This uses the exact reference CLI setup: `wiremock --root-dir ./wiremock --port 8080 --enable-stub-cors`. The npm package includes the standalone WireMock JAR and runs it with Java; Docker is not used.
+La commande reprend celle du projet de référence : `wiremock --root-dir ./wiremock --port 8080 --enable-stub-cors`. Le paquet npm inclut le fichier JAR autonome de WireMock et le lance avec Java, sans Docker.
 
-| Endpoint                        | Behavior                                                        |
-| ------------------------------- | --------------------------------------------------------------- |
-| `GET /api/quizzes/react-basics` | Serves `wiremock/__files/react-basics.json`                     |
-| `POST /api/quiz-submissions`    | Returns a static `202` acknowledgement; stores nothing remotely |
+| Point d’accès                   | Comportement                                                         |
+| ------------------------------- | -------------------------------------------------------------------- |
+| `GET /api/quizzes/react-basics` | Sert `wiremock/__files/react-basics.json`                            |
+| `POST /api/quiz-submissions`    | Renvoie un accusé de réception statique `202`, sans stockage distant |
 
-Vite proxies `/api` in both dev and preview to `VITE_API_PROXY_TARGET`. The reusable service uses native `fetch`, validates GET responses, checks HTTP status, and times out after 1.8 seconds. On initial API failure it uses the same bundled JSON fixture. On submission, results are persisted locally before the best-effort POST; an unavailable mock never discards or replaces them. Static endpoints do not act as a dynamic database, and offline submissions are not queued for later replay.
+En développement et en aperçu, Vite transmet `/api` à `VITE_API_PROXY_TARGET`. Le service utilise `fetch`, valide les données GET, vérifie le statut HTTP et limite l’attente à 1,8 seconde. En cas d’échec initial, les mêmes questions JSON intégrées sont utilisées. À la soumission, les résultats sont enregistrés localement avant le POST facultatif. Un serveur simulé indisponible ne les efface pas. Ces réponses statiques ne constituent pas une base de données dynamique ; les envois hors connexion ne sont pas rejoués ultérieurement.
 
-For deployment, configure the host to serve `index.html` for browser routes. Vite's proxy is only for local dev/preview; a deployed API needs a same-origin reverse proxy or an appropriate public API base URL with CORS. The bundled fixture still supports a static deployment without an API.
+Pour le déploiement, configurez l’hébergement afin de servir `index.html` pour les routes du navigateur. Le proxy Vite concerne uniquement le développement et l’aperçu local. Une API déployée nécessite un proxy de même origine ou une URL publique avec une configuration CORS adaptée. Les questions intégrées permettent également un hébergement statique sans API.
 
-## Design system, Storybook, and accessibility
+## Styles, Storybook et accessibilité
 
-`src/styles/tokens.css` centralizes light/dark colors, spacing, typography, control sizes, shadows, radii, and motion. Desktop uses three columns, tablet places the navigator alongside the question with the summary below, and mobile stacks the cards with a horizontally scrollable numbered question strip. All ten questions remain reachable at 320px. No external fonts or image services are needed.
+`src/styles/tokens.css` centralise les couleurs des thèmes clair et sombre, espacements, typographie, dimensions, ombres, arrondis et animations. La disposition compacte utilise trois colonnes sur ordinateur, deux colonnes avec le suivi en dessous sur tablette, puis des cartes empilées sur mobile. La liste numérotée défile horizontalement sur mobile. Les dix questions restent accessibles à 320 px. Aucune police ni image distante n’est nécessaire.
 
-Storybook matches the reference React/Vite configuration and addons: Docs, A11y, Chromatic, and MCP. Stories live only in `src/stories/`, cover all atoms and quiz components, include interactive answer/navigation examples, and use a light/dark toolbar. The complete layout story runs inside MemoryRouter and does not touch application storage. MDX provides setup and atom prop documentation. Chromatic is installed for parity; no upload or external publication is configured.
+Storybook reprend React/Vite et les extensions Docs, A11y, Chromatic et MCP. Les exemples sont dans `src/stories/`, couvrent tous les composants et proposent des contrôles interactifs ainsi que des thèmes clair et sombre. Les noms, contenus et descriptions des exemples et la documentation MDX sont en français. L’exemple complet utilise MemoryRouter et ne touche pas au stockage de l’application. Chromatic est présent pour conserver les mêmes outils ; aucune publication distante n’est configurée.
 
-Answers use native radios with arrow-key and Space selection. The question navigator exposes current-step and answer-status labels. Navigation moves focus to the new question heading. A skip link, visible focus indicators, native modal focus trapping/restoration, labelled progress bar, reduced-motion support, and a screen-reader-friendly timer are included. The timer does not announce every second; it announces the final-minute warning once.
+Les réponses utilisent des boutons radio natifs, accessibles avec les flèches et Espace. La navigation expose le libellé de chaque question et l’étape actuelle. Le focus passe au titre lors d’un changement de question. Un lien d’accès direct, des indicateurs de focus, une fenêtre modale native, une barre de progression étiquetée et la réduction des animations sont inclus. Le document est déclaré en français et les noms accessibles sont traduits. Le compte à rebours n’annonce pas chaque seconde ; il signale une fois la dernière minute.
 
-## Verification
+## Vérification
 
-Required project checks:
+Commandes à exécuter :
 
 ```sh
 npm run lint
@@ -116,17 +117,18 @@ npm run build
 npm run build-storybook
 ```
 
-Functional verification checklist:
+Vérifications fonctionnelles :
 
-1. Start without WireMock: verify the fixture loads, question one is unanswered, and all 10 questions are available.
-2. Select and change answers; navigate using Next, Previous, and numbered questions. Confirm retained selections and totals summing to 10.
-3. Refresh mid-quiz: verify answers, active question, and original countdown deadline remain. Toggle theme and refresh again.
-4. Finish with unanswered questions: cancel using Keep going, Escape, or the close button; then confirm. Verify counts, percentage, review labels, and explanations.
-5. Refresh results, then restart: verify a new attempt, cleared answers, question one, and a full timer.
-6. Set a short duration on a fresh installation: verify automatic submission, including after refresh, in an inactive tab, and while the confirmation is open.
-7. Try corrupt/old-version storage and blocked storage; verify recovery or a session-only warning.
-8. Run WireMock and verify both endpoints, then stop it and confirm local persistence still works.
-9. Inspect desktop, tablet, 390px, and 320px layouts in both themes. Verify radio keyboard navigation, visible focus, no page-wide horizontal overflow, and accessible dialog behavior.
-10. In Storybook, inspect the full-layout and results stories, update controls, toggle themes, and use the Accessibility panel.
+1. Démarrer sans WireMock : vérifier le chargement des dix questions en français et une première question sans réponse.
+2. Sélectionner et remplacer des réponses, naviguer avec Précédent/Suivant et la liste, puis vérifier les sélections et la progression.
+3. Recharger pendant le quiz : vérifier les réponses, la question actuelle et l’échéance. Changer de thème puis recharger à nouveau.
+4. Terminer avec des questions sans réponse : annuler avec Continuer, Échap ou le bouton de fermeture, puis confirmer. Vérifier les totaux, le pourcentage et le corrigé en français.
+5. Recharger les résultats puis recommencer : vérifier une nouvelle tentative, les réponses effacées et le compte à rebours réinitialisé.
+6. Utiliser une durée courte : vérifier la fin automatique après rechargement, dans un onglet inactif et avec la confirmation ouverte.
+7. Essayer des données anciennes, corrompues et un stockage bloqué : vérifier la restauration ou le message de récupération approprié.
+8. Restaurer une ancienne tentative anglaise compatible : vérifier sa traduction sans perte des réponses ni modification de l’échéance.
+9. Lancer WireMock, vérifier les deux points d’accès, puis l’arrêter et vérifier la persistance locale.
+10. Vérifier les dispositions ordinateur, tablette, 390 px et 320 px dans les deux thèmes, le clavier, le focus et l’absence de débordement horizontal.
+11. Dans Storybook, vérifier les exemples, leurs contrôles, les thèmes et le panneau d’accessibilité.
 
-No automated testing framework, drag-and-drop libraries, Redux, Axios, TypeScript source, or Docker configuration is added. The lockfile, source, fixtures, mappings, and configuration remain trackable; dependencies, build output, caches, and local environment files are ignored.
+Aucun outil de test automatisé supplémentaire, bibliothèque de glisser-déposer, Redux, Axios, code TypeScript ou configuration Docker n’est ajouté. Les sources, questions, configurations et le fichier de verrouillage restent suivis par Git ; les dépendances, compilations, caches et variables locales sont ignorés.

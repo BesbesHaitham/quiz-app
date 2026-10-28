@@ -12,13 +12,13 @@ export default {
   initialGlobals: { theme: 'light' },
   globalTypes: {
     theme: {
-      description: 'Component theme',
+      description: 'Thème des composants',
       toolbar: {
-        title: 'Theme',
+        title: 'Thème',
         icon: 'circlehollow',
         items: [
-          { value: 'light', title: 'Light' },
-          { value: 'dark', title: 'Dark' },
+          { value: 'light', title: 'Clair' },
+          { value: 'dark', title: 'Sombre' },
         ],
         dynamicTitle: true,
       },
@@ -31,7 +31,7 @@ export default {
     a11y: { test: 'off' },
     options: {
       storySort: {
-        order: ['Configure your project', 'Atoms', 'Molecules', 'Organisms', 'Templates'],
+        order: ['Configurer le projet', 'Atomes', 'Molécules', 'Organismes', 'Modèles'],
       },
     },
   },

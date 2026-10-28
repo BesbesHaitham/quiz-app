@@ -1,46 +1,46 @@
 {
   "id": "react-basics",
-  "title": "React Basics",
-  "description": "Test your knowledge about React",
+  "title": "Les bases de React",
+  "description": "Testez vos connaissances sur React",
   "durationSeconds": 600,
   "questions": [
     {
       "id": "react",
-      "text": "What is React?",
+      "text": "Qu’est-ce que React ?",
       "difficulty": "Easy",
       "options": [
-        "A database management system",
-        "A JavaScript library for building user interfaces",
-        "A programming language",
-        "A web server"
+        "Un système de gestion de bases de données",
+        "Une bibliothèque JavaScript pour créer des interfaces utilisateur",
+        "Un langage de programmation",
+        "Un serveur web"
       ],
       "correctIndex": 1,
-      "explanation": "React is a JavaScript library for building user interfaces from reusable components."
+      "explanation": "React est une bibliothèque JavaScript qui permet de créer des interfaces utilisateur à partir de composants réutilisables."
     },
     {
       "id": "components",
-      "text": "Which of the following is a valid React functional component?",
+      "text": "Quel exemple est un composant fonctionnel React valide ?",
       "difficulty": "Easy",
       "options": [
-        "function Welcome() { return <h1>Hello</h1>; }",
-        "function welcome() { print('Hello'); }",
-        "component Welcome = '<h1>Hello</h1>';",
-        "new React('<h1>Hello</h1>');"
+        "function Bienvenue() { return <h1>Bonjour</h1>; }",
+        "function bienvenue() { print('Bonjour'); }",
+        "component Bienvenue = '<h1>Bonjour</h1>';",
+        "new React('<h1>Bonjour</h1>');"
       ],
       "correctIndex": 0,
-      "explanation": "A function component starts with a capital letter and returns renderable content, such as JSX."
+      "explanation": "Le nom d’un composant fonctionnel commence par une majuscule. La fonction renvoie un contenu affichable, par exemple du JSX."
     },
     {
       "id": "state",
-      "text": "What hook is used to manage state in a functional component in React?",
+      "text": "Quel hook permet de gérer l’état dans un composant fonctionnel React ?",
       "difficulty": "Medium",
       "options": ["useEffect", "useContext", "useState", "useRef"],
       "correctIndex": 2,
-      "explanation": "useState adds a state variable and a setter to a function component. Updating that state requests a new render. useRef retains a value without triggering a render."
+      "explanation": "useState ajoute une variable d’état et une fonction de mise à jour à un composant fonctionnel. Modifier cet état déclenche un nouveau rendu. useRef conserve une valeur sans déclencher de rendu."
     },
     {
       "id": "state-syntax",
-      "text": "Which syntax correctly declares a count state variable?",
+      "text": "Quelle syntaxe déclare correctement une variable d’état count ?",
       "difficulty": "Easy",
       "options": [
         "const count = useState = 0;",
@@ -49,80 +49,81 @@
         "const count = React.state(0);"
       ],
       "correctIndex": 1,
-      "explanation": "useState returns an array containing the current state and its setter. Array destructuring gives them useful names."
+      "explanation": "useState renvoie un tableau contenant l’état actuel et sa fonction de mise à jour. La déstructuration du tableau permet de leur donner des noms explicites."
     },
     {
       "id": "jsx",
-      "text": "What is JSX?",
+      "text": "Qu’est-ce que JSX ?",
       "difficulty": "Easy",
       "options": [
-        "A CSS preprocessor",
-        "A browser API for JSON",
-        "A replacement for JavaScript",
-        "A syntax extension for writing markup in JavaScript"
+        "Un préprocesseur CSS",
+        "Une API du navigateur pour JSON",
+        "Un remplacement de JavaScript",
+        "Une extension de syntaxe pour écrire du balisage en JavaScript"
       ],
       "correctIndex": 3,
-      "explanation": "JSX is a JavaScript syntax extension that lets you describe UI with markup. A build tool transforms it into JavaScript."
+      "explanation": "JSX est une extension de syntaxe de JavaScript qui permet de décrire une interface avec du balisage. Un outil de compilation le transforme en JavaScript."
     },
     {
       "id": "props",
-      "text": "How do you pass data from a parent component to a child?",
+      "text": "Comment transmettre des données d’un composant parent à un enfant ?",
       "difficulty": "Easy",
       "options": [
-        "Through props",
-        "By changing the child's state directly",
-        "Through the DOM only",
-        "By calling useEffect in the parent"
+        "Avec les props",
+        "En modifiant directement l’état de l’enfant",
+        "Uniquement avec le DOM",
+        "En appelant useEffect dans le parent"
       ],
       "correctIndex": 0,
-      "explanation": "Parents pass information to children through props. A child treats its props as read-only inputs."
+      "explanation": "Les parents transmettent des informations à leurs enfants avec les props. Un composant enfant traite ses props comme des données en lecture seule."
     },
     {
       "id": "lists",
-      "text": "Which array method is commonly used to render a list of React elements?",
+      "text": "Quelle méthode de tableau sert généralement à afficher une liste d’éléments React ?",
       "difficulty": "Medium",
       "options": ["forEach()", "find()", "map()", "includes()"],
       "correctIndex": 2,
-      "explanation": "map() transforms each item into an element and returns a new array. Give each element a stable key that identifies the item."
+      "explanation": "map() transforme chaque élément du tableau en un élément React et renvoie un nouveau tableau. Attribuez à chaque élément une clé stable qui l’identifie."
     },
     {
       "id": "effects",
-      "text": "What is the primary purpose of useEffect?",
+      "text": "Quel est le rôle principal de useEffect ?",
       "difficulty": "Medium",
       "options": [
-        "To declare a state variable",
-        "To synchronize a component with an external system",
-        "To return JSX from a component",
-        "To prevent every re-render"
+        "Déclarer une variable d’état",
+        "Synchroniser un composant avec un système externe",
+        "Renvoyer du JSX depuis un composant",
+        "Empêcher tous les nouveaux rendus"
       ],
       "correctIndex": 1,
-      "explanation": "Effects synchronize components with external systems, such as subscriptions, timers, or browser APIs. Return a cleanup function when necessary."
+      "explanation": "Les effets synchronisent les composants avec des systèmes externes : abonnements, minuteries ou API du navigateur. Renvoyez une fonction de nettoyage si nécessaire."
     },
     {
       "id": "immutability",
-      "text": "Which statement is true about updating React state?",
+      "text": "Quelle affirmation sur la mise à jour de l’état React est correcte ?",
       "difficulty": "Medium",
       "options": [
-        "Mutating a state object always triggers a render",
-        "State must be stored in global variables",
-        "State updates immediately change the running function's snapshot",
-        "Objects and arrays in state should be replaced with new values"
+        "Modifier directement un objet d’état déclenche toujours un rendu",
+        "L’état doit être stocké dans des variables globales",
+        "Une mise à jour modifie immédiatement l’état lu par la fonction en cours",
+        "Les objets et tableaux de l’état doivent être remplacés par de nouvelles valeurs"
       ],
       "correctIndex": 3,
-      "explanation": "Treat state as immutable. Create a new object or array and pass it to the setter. Use a functional updater when the next value depends on previous state."
+      "explanation": "Traitez l’état comme immuable. Créez un nouvel objet ou tableau et transmettez-le à la fonction de mise à jour. Utilisez une fonction de rappel si la nouvelle valeur dépend de l’état précédent."
     },
     {
       "id": "virtual-dom",
-      "text": "What is the virtual DOM?",
+      "text": "Qu’est-ce que le DOM virtuel ?",
       "difficulty": "Medium",
       "options": [
-        "An in-memory representation of the UI used during reconciliation",
-        "A second browser window",
-        "A database of HTML templates",
-        "A browser feature that replaces CSS"
+        "Une représentation de l’interface en mémoire utilisée lors de la réconciliation",
+        "Une deuxième fenêtre du navigateur",
+        "Une base de données de modèles HTML",
+        "Une fonctionnalité du navigateur qui remplace CSS"
       ],
       "correctIndex": 0,
-      "explanation": "React keeps an in-memory representation of the UI, reconciles successive renders, and commits the necessary changes to the actual DOM."
+      "explanation": "React conserve une représentation de l’interface en mémoire, compare les rendus successifs lors de la réconciliation, puis applique les modifications nécessaires au DOM réel."
     }
-  ]
+  ],
+  "locale": "fr"
 }

@@ -7,7 +7,7 @@ export default function CountdownTimer({ remaining, duration }) {
   return (
     <section
       className={`${styles.base} ${urgent ? styles.urgent : ''}`}
-      aria-label="Quiz countdown"
+      aria-label="Compte à rebours du quiz"
     >
       <div className={styles.ring}>
         <svg viewBox="0 0 220 220" aria-hidden="true">
@@ -25,15 +25,16 @@ export default function CountdownTimer({ remaining, duration }) {
           className={styles.content}
           role="timer"
           aria-live="off"
-          aria-label={`${formatTime(remaining)} remaining`}
+          aria-label={`${formatTime(remaining)} de temps restant`}
         >
           <strong>{formatTime(remaining)}</strong>
-          <span>Time left</span>
+          <span>Temps restant</span>
         </div>
       </div>
       {urgent && (
         <span className="sr-only" role="status">
-          Less than a minute left. Your quiz will submit automatically when time runs out.
+          Il reste moins d’une minute. Votre quiz sera envoyé automatiquement à la fin du temps
+          imparti.
         </span>
       )}
     </section>

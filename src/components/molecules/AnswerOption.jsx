@@ -1,6 +1,6 @@
 import styles from './AnswerOption.module.css';
 
-/** Native radio semantics provide Tab, arrow-key and Space selection. */
+/** Bouton radio natif : navigation avec Tab et les flèches, sélection avec Espace. */
 export default function AnswerOption({
   option,
   index,

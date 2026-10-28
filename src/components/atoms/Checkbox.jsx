@@ -2,7 +2,7 @@ import { useEffect, useImperativeHandle, useRef } from 'react';
 import styles from './Checkbox.module.css';
 import utilities from '../../styles/atomUtilities.module.css';
 
-/** A native checkbox with optional mixed state and boolean-value callback. */
+/** Case à cocher native avec état mixte facultatif et rappel recevant un booléen. */
 export default function Checkbox({
   variant = 'default',
   size = 'md',

@@ -1,5 +1,5 @@
 {
-  "name": "React Basics quiz (static fixture)",
+  "name": "Quiz Les bases de React (données statiques)",
   "request": { "method": "GET", "urlPath": "/api/quizzes/react-basics" },
   "response": {
     "status": 200,

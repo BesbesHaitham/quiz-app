@@ -1,7 +1,7 @@
 import styles from './Input.module.css';
 import utilities from '../../styles/atomUtilities.module.css';
 
-/** A native input, textarea or select. Use value/onChange OR defaultValue. */
+/** Champ natif input, textarea ou select. Utilisez value/onChange OU defaultValue. */
 export default function Input({
   as: Component = 'input',
   variant = 'default',

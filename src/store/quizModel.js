@@ -1,5 +1,34 @@
 export const STORAGE_KEY = 'quiz-attempt:v1';
 export const STORAGE_VERSION = 1;
+export const DIFFICULTY_LABELS = { Easy: 'Facile', Medium: 'Moyen', Hard: 'Difficile' };
+
+// Traduit les anciennes données sans changer l’ordre des choix ni les bonnes réponses.
+export function localizeQuiz(quiz, translation) {
+  if (
+    translation.locale !== 'fr' ||
+    quiz.locale === 'fr' ||
+    quiz.id !== translation.id ||
+    quiz.questions.length !== translation.questions.length ||
+    !quiz.questions.every(
+      (question, index) =>
+        question.id === translation.questions[index].id &&
+        question.correctIndex === translation.questions[index].correctIndex
+    )
+  )
+    return quiz;
+  return {
+    ...quiz,
+    locale: 'fr',
+    title: translation.title,
+    description: translation.description,
+    questions: quiz.questions.map((question, index) => ({
+      ...question,
+      text: translation.questions[index].text,
+      options: translation.questions[index].options,
+      explanation: translation.questions[index].explanation,
+    })),
+  };
+}
 
 const nonEmpty = (value, limit = 2000) =>
   typeof value === 'string' && value.trim().length > 0 && value.length <= limit;
